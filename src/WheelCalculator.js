@@ -14,7 +14,7 @@ const WheelCalculator = (props) => {
     let totalDiameter = parseFloat(wheelDiameter) + (2 * sidewallHeight);  // Calculate Total Diameter
     let totalRadius = totalDiameter / 2;  // Calculate Total Radius
     let circumference = 2 * Math.PI * totalRadius;  // Calculate Total Circumference
-    let revsPerMi = 63360 / circumference;  // Calculate Revolutions per Mile
+    let revsPerMile = 63360 / circumference;  // Calculate Revolutions per Mile
 
     setRows(rows.concat({
       sectionWidth: sectionWidth,
@@ -24,7 +24,7 @@ const WheelCalculator = (props) => {
       totalRadius: totalRadius,
       totalDiameter: totalDiameter,
       circumference: circumference,
-      revsPerMi: revsPerMi
+      revsPerMile: revsPerMile
     }));
   }
 
@@ -62,16 +62,10 @@ const WheelCalculator = (props) => {
           onChange={e => setwheelDiameter(e.target.value)}
           />
 
-        {/* Add Specs */}
+        {/* Add Button */}
         <input type="submit" value="Add" />
 
       </form>
-
-      {/* <WheelTable
-        sectionWidth={sectionWidth}
-        sidewallAspect={sidewallAspect}
-        wheelDiameter={wheelDiameter}
-      /> */}
 
       <table className="table WheelTable">
         <thead>
@@ -95,7 +89,7 @@ const WheelCalculator = (props) => {
               radius={row.totalRadius}
               diameter={row.totalDiameter}
               circumference={row.circumference}
-              revsPerMile={row.revsPerMi}
+              revsPerMile={row.revsPerMile}
               unit="in"
             />
           ))}
