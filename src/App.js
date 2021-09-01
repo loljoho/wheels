@@ -12,7 +12,7 @@ function App() {
             <div className="column is-8-desktop is-offset-2-desktop">
               <h3 className="title has-text-black">Wheels</h3>
               <hr className="login-hr" />
-              <p className="subtitle has-text-black">by Jonathan Ho</p>
+              <p className="subtitle has-text-black">by Joho</p>
               <div className="box">
                 <figure className="logo">
                   <img alt="Logo" src={logo} />

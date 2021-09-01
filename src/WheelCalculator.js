@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
 
-import WheelTable from './WheelTable';
+import WheelRow from './WheelRow';
 
 const WheelCalculator = (props) => {
   const [sectionWidth, setSectionWidth] = useState('');
   const [sidewallAspect, setsidewallAspect] = useState('');
   const [wheelDiameter, setwheelDiameter] = useState('');
+  const [rows, setRows] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let sidewallHeight = (sidewallAspect / 100 * sectionWidth / 25.4); // Calculate Sidewall Height
+    let totalDiameter = parseFloat(wheelDiameter) + (2 * sidewallHeight);  // Calculate Total Diameter
+    let totalRadius = totalDiameter / 2;  // Calculate Total Radius
+    let circumference = 2 * Math.PI * totalRadius;  // Calculate Total Circumference
+    let revsPerMi = 63360 / circumference;  // Calculate Revolutions per Mile
 
-    // Calculate Sidewall Height
-    let sdwHeight = (sidewallAspect / 100 * sectionWidth / 25.4);
-    console.log(`sdwHeight: ${sdwHeight}`);
-
-    // Calculate Total Diameter
-    let totalDiam = parseFloat(wheelDiameter) + (2 * sdwHeight);
-    console.log(`totalDiam: ${totalDiam}`);
-
-    // Calculate Total Radius
-    let totalRadi = totalDiam / 2;
-    console.log(`totalRadi: ${totalRadi}`);
-
-    // Calculate Total Circumference
-    let totalCirc = 2 * Math.PI * totalRadi;
-    console.log(`totalCirc: ${totalCirc}`);
-
-    // Calculate Revolutions per Mile
-    let revsPerMi = 63360 / totalCirc;
-    console.log(`revsPerMi: ${revsPerMi}`);
-
+    setRows(rows.concat({
+      sectionWidth: sectionWidth,
+      sidewallAspect: sidewallAspect,
+      wheelDiameter: wheelDiameter,
+      sidewallHeight: sidewallHeight,
+      totalRadius: totalRadius,
+      totalDiameter: totalDiameter,
+      circumference: circumference,
+      revsPerMi: revsPerMi
+    }));
   }
 
   return (
@@ -71,11 +67,40 @@ const WheelCalculator = (props) => {
 
       </form>
 
-      <WheelTable
+      {/* <WheelTable
         sectionWidth={sectionWidth}
         sidewallAspect={sidewallAspect}
         wheelDiameter={wheelDiameter}
-      />
+      /> */}
+
+      <table className="table WheelTable">
+        <thead>
+          <tr>
+            <th>Specification</th>
+            <th>Sidewall Height</th>
+            <th>Total Radius</th>
+            <th>Total Diameter</th>
+            <th>Total Circumference</th>
+            <th>Revolutions per Mile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <WheelRow
+              key={i}
+              sectionWidth={row.sectionWidth}
+              sidewallAspect={row.sidewallAspect}
+              wheelDiameter={row.wheelDiameter}
+              sidewallHeight={row.sidewallHeight}
+              radius={row.totalRadius}
+              diameter={row.totalDiameter}
+              circumference={row.circumference}
+              revsPerMile={row.revsPerMi}
+              unit="in"
+            />
+          ))}
+        </tbody>
+      </table>
 
     </>
   );
