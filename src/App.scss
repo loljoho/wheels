@@ -4,18 +4,49 @@ body {
   // font-weight: 300;
 }
 
-.hero.is-success {
-  background: #F2F6FA;
-}
+//  App
+// ------------------------------
 
-.hero .nav,
-.hero.is-success .nav {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
+.App {
+  .hero.is-success {
+    background: #F2F6FA;
+  }
 
-.box {
-  margin-top: 5rem;
+  .hero .nav,
+  .hero.is-success .nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .box {
+    margin-top: 4rem;
+  }
+
+  .section {
+    padding-top: 1em;
+  }
+
+  .table-container {
+    min-height: 20vh;
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+
+  hr {
+    border-bottom: 1px solid black;
+  }
+
+  input {
+    //   font-weight: 300;
+  }
+
+  p {
+    //   font-weight: 700;
+  }
+
+  p.subtitle {
+    // padding-top: 1rem;
+  }
 }
 
 
@@ -32,32 +63,21 @@ $logo-height: 64px;
   }
 }
 
+
+//  Wheel Calculator
+// ------------------------------
+
 .WheelForm {
+  margin-bottom: 1em;
   .between-input {
     font-size: 1em;
     line-height: 2em;
   }
 }
 
-input {
-//   font-weight: 300;
-}
 
-p {
-//   font-weight: 700;
-}
-
-p.subtitle {
-  // padding-top: 1rem;
-}
-
-.login-hr {
-  border-bottom: 1px solid black;
-}
-
-.has-text-black {
-  color: black;
-}
+//  Misc
+// ------------------------------
 
 .field {
   padding-bottom: 10px;
