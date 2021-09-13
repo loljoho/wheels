@@ -10,22 +10,22 @@ const WheelCalculator = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let sidewallHeight = (sidewallAspect / 100 * sectionWidth / 25.4); // Calculate Sidewall Height
-    let totalDiameter = parseFloat(wheelDiameter) + (2 * sidewallHeight);  // Calculate Total Diameter
-    let totalRadius = totalDiameter / 2;  // Calculate Total Radius
-    let circumference = 2 * Math.PI * totalRadius;  // Calculate Total Circumference
-    let revsPerMile = 63360 / circumference;  // Calculate Revolutions per Mile
+    createNewRow();
+  }
 
-    setRows(rows.concat({
+  const createNewRow = () => {
+    let newRow = {
       sectionWidth: sectionWidth,
       sidewallAspect: sidewallAspect,
-      wheelDiameter: wheelDiameter,
-      sidewallHeight: sidewallHeight,
-      totalRadius: totalRadius,
-      totalDiameter: totalDiameter,
-      circumference: circumference,
-      revsPerMile: revsPerMile
-    }));
+      wheelDiameter: wheelDiameter
+    };
+    newRow.sidewallHeight = (sidewallAspect / 100 * sectionWidth / 25.4); // Calculate Sidewall Height
+    newRow.totalDiameter = parseFloat(wheelDiameter) + (2 * newRow.sidewallHeight);  // Calculate Total Diameter
+    newRow.totalRadius = newRow.totalDiameter / 2;  // Calculate Total Radius
+    newRow.circumference = 2 * Math.PI * newRow.totalRadius;  // Calculate Total Circumference
+    newRow.revsPerMile = 63360 / newRow.circumference;  // Calculate Revolutions per Mile
+
+    setRows(rows.concat(newRow));
   }
 
   return (
