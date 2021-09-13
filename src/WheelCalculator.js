@@ -11,23 +11,20 @@ const WheelCalculator = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewRow();
+    calculateRow();
   }
 
   /**
-   * Calculate and add new row values
+   * Calculate new row values
    */
-  const createNewRow = () => {
-    let newRow = {
-      sectionWidth: sectionWidth,
-      sidewallAspect: sidewallAspect,
-      wheelDiameter: wheelDiameter
-    };
-    newRow.sidewallHeight = (sidewallAspect / 100 * sectionWidth / 25.4); // Calculate Sidewall Height
-    newRow.totalDiameter = parseFloat(wheelDiameter) + (2 * newRow.sidewallHeight);  // Calculate Total Diameter
-    newRow.totalRadius = newRow.totalDiameter / 2;  // Calculate Total Radius
-    newRow.circumference = 2 * Math.PI * newRow.totalRadius;  // Calculate Total Circumference
-    newRow.revsPerMile = 63360 / newRow.circumference;  // Calculate Revolutions per Mile
+  const calculateRow = () => {
+    let newRow = {};
+    newRow.spec = `${sectionWidth}/${sidewallAspect}-${wheelDiameter}`; // Create Specification string
+    newRow.sidewall = (sidewallAspect / 100 * sectionWidth / 25.4); // Calculate Sidewall Height
+    newRow.diameter = parseFloat(wheelDiameter) + (2 * newRow.sidewall);  // Calculate Total Diameter
+    newRow.radius = newRow.diameter / 2;  // Calculate Total Radius
+    newRow.circumf = 2 * Math.PI * newRow.radius;  // Calculate Total Circumference
+    newRow.revsPerMile = 63360 / newRow.circumf;  // Calculate Revolutions per Mile
 
     setRows(rows.concat(newRow));
   }
@@ -54,13 +51,11 @@ const WheelCalculator = (props) => {
         key={i}
         className={i === activeRow ? `active` : ``}
         value={i}
-        sectionWidth={row.sectionWidth}
-        sidewallAspect={row.sidewallAspect}
-        wheelDiameter={row.wheelDiameter}
-        sidewallHeight={row.sidewallHeight}
-        radius={row.totalRadius}
-        diameter={row.totalDiameter}
-        circumference={row.circumference}
+        spec={row.spec}
+        sidewall={row.sidewall}
+        radius={row.radius}
+        diameter={row.diameter}
+        circumf={row.circumf}
         revsPerMile={row.revsPerMile}
         unit="in"
         buttonClick={selectRow.bind(this)}
@@ -112,10 +107,11 @@ const WheelCalculator = (props) => {
           <tr>
             <th>Specification</th>
             <th>Sidewall Height</th>
-            <th>Total Radius</th>
-            <th>Total Diameter</th>
-            <th>Total Circumference</th>
-            <th>Revolutions per Mile</th>
+            <th>Radius</th>
+            <th>Diameter</th>
+            <th>Circumference</th>
+            <th>Revolutions/Mile</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
