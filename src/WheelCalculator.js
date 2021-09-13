@@ -28,6 +28,23 @@ const WheelCalculator = (props) => {
     setRows(rows.concat(newRow));
   }
 
+  const renderTableRows = () => {
+    return rows.map((row, i) => (
+      <WheelRow
+        key={i}
+        sectionWidth={row.sectionWidth}
+        sidewallAspect={row.sidewallAspect}
+        wheelDiameter={row.wheelDiameter}
+        sidewallHeight={row.sidewallHeight}
+        radius={row.totalRadius}
+        diameter={row.totalDiameter}
+        circumference={row.circumference}
+        revsPerMile={row.revsPerMile}
+        unit="in"
+      />
+    ));
+  }
+
   return (
     <>
       <form
@@ -79,20 +96,7 @@ const WheelCalculator = (props) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, i) => (
-            <WheelRow
-              key={i}
-              sectionWidth={row.sectionWidth}
-              sidewallAspect={row.sidewallAspect}
-              wheelDiameter={row.wheelDiameter}
-              sidewallHeight={row.sidewallHeight}
-              radius={row.totalRadius}
-              diameter={row.totalDiameter}
-              circumference={row.circumference}
-              revsPerMile={row.revsPerMile}
-              unit="in"
-            />
-          ))}
+          { renderTableRows() }
         </tbody>
       </table>
 
