@@ -4,8 +4,8 @@ import WheelRow from './WheelRow';
 
 const WheelCalculator = (props) => {
   const [sectionWidth, setSectionWidth] = useState('');
-  const [sidewallAspect, setsidewallAspect] = useState('');
-  const [wheelDiameter, setwheelDiameter] = useState('');
+  const [sidewallAspect, setSidewallAspect] = useState('');
+  const [wheelDiameter, setWheelDiameter] = useState('');
   const [rows, setRows] = useState([]);
   const [activeRow, setActiveRow] = useState(null);
 
@@ -89,7 +89,7 @@ const WheelCalculator = (props) => {
           className="input is-small"
           style={{'width': '6em'}}
           value={sidewallAspect}
-          onChange={e => setsidewallAspect(e.target.value)}
+          onChange={e => setSidewallAspect(e.target.value)}
           />
 
         <b className="between-input">-</b>
@@ -99,7 +99,7 @@ const WheelCalculator = (props) => {
           className="input is-small"
           style={{'width': '6em'}}
           value={wheelDiameter}
-          onChange={e => setwheelDiameter(e.target.value)}
+          onChange={e => setWheelDiameter(e.target.value)}
           />
 
         {/* Add Button */}
