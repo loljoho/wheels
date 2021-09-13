@@ -7,12 +7,16 @@ const WheelCalculator = (props) => {
   const [sidewallAspect, setsidewallAspect] = useState('');
   const [wheelDiameter, setwheelDiameter] = useState('');
   const [rows, setRows] = useState([]);
+  const [activeRow, setActiveRow] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewRow();
   }
 
+  /**
+   * Calculate and add new row values
+   */
   const createNewRow = () => {
     let newRow = {
       sectionWidth: sectionWidth,
@@ -28,10 +32,28 @@ const WheelCalculator = (props) => {
     setRows(rows.concat(newRow));
   }
 
+  /**
+   * Set active row
+   */
+  const selectRow = (i) => {
+    if (i === activeRow) {
+      console.log(`Clearing active row`);
+      setActiveRow(null);
+    } else {
+      console.log(`Setting ${i} to active row`);
+      setActiveRow(i);
+    }
+  }
+
+  /**
+   * Render table rows
+   */
   const renderTableRows = () => {
     return rows.map((row, i) => (
       <WheelRow
         key={i}
+        className={i === activeRow ? `active` : ``}
+        value={i}
         sectionWidth={row.sectionWidth}
         sidewallAspect={row.sidewallAspect}
         wheelDiameter={row.wheelDiameter}
@@ -41,6 +63,7 @@ const WheelCalculator = (props) => {
         circumference={row.circumference}
         revsPerMile={row.revsPerMile}
         unit="in"
+        buttonClick={selectRow.bind(this)}
       />
     ));
   }
