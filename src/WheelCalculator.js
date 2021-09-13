@@ -63,7 +63,7 @@ const WheelCalculator = (props) => {
           />
 
         {/* Add Button */}
-        <input type="submit" value="Add" />
+        <input className="btn-add" type="submit" value="Add" />
 
       </form>
 
